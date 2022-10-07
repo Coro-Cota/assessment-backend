@@ -4,8 +4,16 @@ let globalId = 4
 module.exports = {
     getCompliment: (req, res) => {
         // choose random compliment
-        
-        res.status(200).send(compliments);
+        const getRandomCompliment = (arr) => {
+            return arr[Math.floor(Math.random() * arr.length)]
+        }
+
+        let some_compliment = getRandomCompliment(compliments)
+
+        // let randomIndex = Math.floor(Math.random() * compliments.length);
+        // let randomCompliment = compliments[randomIndex];
+
+        res.status(200).send(some_compliment.compliment);
     },
     deleteCompliment: (req, res) =>{
         let index = compliments.findIndex(elem => elem.id === +req.params.id)
