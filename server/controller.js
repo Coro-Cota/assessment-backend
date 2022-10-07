@@ -5,7 +5,7 @@ module.exports = {
     getCompliment: (req, res) => {
         // choose random compliment
         
-        res.status(200).send(randomCompliment);
+        res.status(200).send(compliments);
     },
     deleteCompliment: (req, res) =>{
         let index = compliments.findIndex(elem => elem.id === +req.params.id)
