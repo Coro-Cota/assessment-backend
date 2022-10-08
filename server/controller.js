@@ -30,7 +30,15 @@ module.exports = {
     },
 
     addFortune: (req,res) =>{
-        fortunes.push('')
+
+        let { fortunetxt } = req.body
+
+        fortunes.push(fortunetxt)
+        res.status(200).send(fortunes)
+    },
+
+    deleteFortune: (req,res) => {
+        fortunes.pop()
         res.status(200).send(fortunes)
     }
 

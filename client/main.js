@@ -35,15 +35,19 @@ const getFortuneList = () => {
     })
 };
 
-function fortuneSubmit (evt) {
-    evt.preventDefault()
-    const fortuneSubmit = document.querySelector(".submit")
-}
-
+const fortuneSubmit = document.querySelector(".submit")
+const fortuneText = document.querySelector(".submitInput")
 
 // i need to get addfortune to read the data in the submit form class: submitInput
 const addFortune = () => {
-    axios.post("http://localhost:4000/api/fList/").then(res=> {
+    // this part is the request from the client
+    console.log(fortuneText.value);
+    // you cant send a string to the server, you have to send an object then you can destructure it and use the string then.
+    let newObj = {
+        fortunetxt: fortuneText.value
+    }
+    axios.post("http://localhost:4000/api/fList/", newObj).then(res=> {
+        // .then is the server sending the information
         const data = res.data;
         console.log(data);
     })
@@ -52,3 +56,14 @@ const addFortune = () => {
 fortuneBtn.addEventListener('click', getFortune);
 fortuneBtn.addEventListener('click', getFortuneList);
 fortuneSubmit.addEventListener('submit', addFortune);
+
+const fortuneDelete = document.getElementById("delete")
+
+const deleteFortune = () => {
+    axios.delete("http://localhost:4000/api/fList").then(res=>{
+        const data = res.data;
+        console.log(data);
+    })
+}
+
+fortuneDelete.addEventListener('click', deleteFortune);
