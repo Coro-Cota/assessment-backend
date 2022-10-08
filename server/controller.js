@@ -1,37 +1,37 @@
-const compliments = require('./db.json')
-let globalId = 4
+const fortunes = ["Happiness begins with facing life with a smile and a wink.", "Happy life is just in front of you.", "He who expects no gratitude shall never be disappointed.", "If a true sense of value is to be yours it must come through service."];
+
+const compliments = ["Gee, you're a smart cookie!", "Cool shirt!", "Your Javascript skills are stellar."];
 
 module.exports = {
+
     getCompliment: (req, res) => {
+              
         // choose random compliment
-        const getRandomCompliment = (arr) => {
-            return arr[Math.floor(Math.random() * arr.length)]
-        }
-
-        let some_compliment = getRandomCompliment(compliments)
-
-        // let randomIndex = Math.floor(Math.random() * compliments.length);
-        // let randomCompliment = compliments[randomIndex];
-
-        res.status(200).send(some_compliment.compliment);
-    },
-    deleteCompliment: (req, res) =>{
-        let index = compliments.findIndex(elem => elem.id === +req.params.id)
-        compliments.splice(index,1)
-        res.status(200).send(compliments)
-    },
-    createCompliment: (req,res) =>{
-        let {id, compliment } = req.body
-        let newCompliment = {
-            id: globalId,
-            compliment
-        }
-        compliments.push(newCompliment)
-        res.status(200).send(compliments)
-        globalId++
-    }
-      
+        let randomIndex = Math.floor(Math.random() * compliments.length);
+        let randomCompliment = compliments[randomIndex];
         
-}
+        res.status(200).send(randomCompliment);
+    },
 
-    
+    getComplimentList: (req,res) => {
+        res.status(200).send(compliments);
+    },
+
+    getFortune: (req, res) => {
+        
+        let randomI = Math.floor(Math.random() * fortunes.length);
+        let randomFortune = fortunes[randomI];
+
+        res.status(200).send(randomFortune);
+    },
+
+    getFortuneList: (req, res) => {
+        res.status(200).send(fortunes)
+    },
+
+    addFortune: (req,res) =>{
+        fortunes.push('')
+        res.status(200).send(fortunes)
+    }
+
+}
